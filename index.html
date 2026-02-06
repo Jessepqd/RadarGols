@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Radar Tático Virtual</title>
+
+<meta name="theme-color" content="#00ff9c"/>
+<link rel="manifest" href="manifest.json">
+
+<style>
+body{
+background:black;
+color:#00ff9c;
+font-family:monospace;
+padding:20px;
+}
+button{
+background:#003b1f;
+color:#00ff9c;
+border:none;
+padding:10px;
+margin:5px;
+}
+</style>
+</head>
+
+<body>
+
+<h1>🎯 Radar Tático Virtual</h1>
+
+<h2 id="liga">Liga: Inglesa</h2>
+
+<button onclick="trocarLiga('Inglesa')">Inglesa</button>
+<button onclick="trocarLiga('Espanhola')">Espanhola</button>
+<button onclick="trocarLiga('Italiana')">Italiana</button>
+
+<h3 id="alerta">Monitorando mercado...</h3>
+
+<script>
+function trocarLiga(l){
+document.getElementById("liga").innerText="Liga: "+l;
+gerarAlerta();
+}
+
+function gerarAlerta(){
+let confianca=Math.random()*100;
+
+if(confianca>65){
+let msg="⚡ Entrada com "+confianca.toFixed(1)+"%";
+document.getElementById("alerta").innerText=msg;
+
+if(Notification.permission==="granted"){
+new Notification("Radar Trader",{body:msg});
+}
+}
+}
+
+Notification.requestPermission();
+</script>
+
+</body>
+</html>
